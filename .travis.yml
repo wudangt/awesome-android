@@ -1,0 +1,32 @@
+language: node_js
+node_js:
+- '6'
+cache:
+  apt: true
+  directories:
+  - node_modules
+addons:
+  apt:
+    packages:
+    - calibre
+    - expect
+env:
+  global:
+  - secure: Dmy5XE9bGQtcVionmoJCdrn0Sg/D8r8K9glE0x/+vAeu2UIVtWPxpOeDA7hwHUBeOU+VKuPP8mLIE8+tDPns27xr1qU4yzNoO+o7dysDWgAXq9cDk7aXSRpHXnU5XRjGj4gSihsMeo8ZHie9W2u3YmPfNxnQCPkO/oM9bPblXi0=
+branches:
+  only:
+  - master
+before_install:
+- openssl aes-256-cbc -K $encrypted_b9113630a4c4_key -iv $encrypted_b9113630a4c4_iv
+  -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
+install:
+- npm install gitbook-cli -g
+- npm install
+- gitbook install
+script:
+- chmod u+x ./build
+- chmod u+x ./genbook
+- chmod u+x ./genwebsite
+- ./genwebsite
+- chmod u+x .travis/deploy.sh
+- .travis/deploy.sh

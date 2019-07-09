@@ -1,0 +1,12 @@
+# build
+.git
+.publish
+.travis
+.gulp
+node_modules
+build
+genbook
+genwebsite
+books
+website
+_book
